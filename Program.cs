@@ -17,10 +17,6 @@ namespace HTTPserver
             string name = "localhost";
             IPAddress[] addrs = Dns.GetHostEntry(name).AddressList;
 
-            //TcpListener welcomeSocket = new TcpListener(addrs[1], 6789);
-            //IPAddress ip = IPAddress.Parse("127.0.0.1");
-            //TcpListener serverSocket = new TcpListener(ip, 6789);
-
             TcpListener serverSocket = new TcpListener(6789);
             serverSocket.Start();
 
@@ -41,12 +37,12 @@ namespace HTTPserver
             Stream ns = new NetworkStream(connectionSocket);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
-            //sw.WriteLine("GET HTTP/1.0 \r\n");
             
             sw.AutoFlush = true; // enable automatic flushing
 
             string message = sr.ReadLine();
-            string answer;
+            string firstLine = message;
+
             while (!string.IsNullOrEmpty(message))
             {
                 Console.WriteLine("Client: " + message);
@@ -54,9 +50,31 @@ namespace HTTPserver
             }
 
             sw.WriteLine("HTTP/1.0 200 OK \r\n");
-            sw.WriteLine("\r\n Haha");
+            sw.WriteLine("\r\n");
+            if (IsFileRequested(firstLine))
+            {
+                string[] words = firstLine.Split(' ');
+                sw.WriteLine(words[1] + " was requested");
+            }
+            else
+            {
+                sw.WriteLine("No request");
+            }
 
             connectionSocket.Close();
+        }
+
+        /**
+         * Checks if theres a request from browser
+         */
+        public static bool IsFileRequested(string text)
+        {
+            string[] words = text.Split(' ');
+            if (words[1].Equals("/"))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
