@@ -1,1 +1,6 @@
 c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\bin\Debug\HTTPserver.exe.config
+c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\bin\Debug\HTTPserver.exe
+c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\bin\Debug\HTTPserver.pdb
+c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.exe
+c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.pdb
+c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.csprojResolveAssemblyReference.cache
