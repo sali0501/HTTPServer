@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HTTPserver
@@ -27,7 +28,9 @@ namespace HTTPserver
             {
                 Socket connectionSocket = serverSocket.AcceptSocket();
                 Console.WriteLine("Server activated now");
-                DoIt(connectionSocket);
+                Thread thread = new Thread(() => DoIt(connectionSocket));
+                thread.Start();
+                //DoIt(connectionSocket);
             }
 
             serverSocket.Stop();
@@ -38,7 +41,8 @@ namespace HTTPserver
             Stream ns = new NetworkStream(connectionSocket);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
-            sw.WriteLine("GET HTTP/1.0 \n\n");
+            //sw.WriteLine("GET HTTP/1.0 \r\n");
+            
             sw.AutoFlush = true; // enable automatic flushing
 
             string message = sr.ReadLine();
@@ -46,11 +50,12 @@ namespace HTTPserver
             while (!string.IsNullOrEmpty(message))
             {
                 Console.WriteLine("Client: " + message);
-                answer = message.ToUpper();
-                sw.WriteLine(answer);
                 message = sr.ReadLine();
-
             }
+
+            sw.WriteLine("HTTP/1.0 200 OK \r\n");
+            sw.WriteLine("\r\n Haha");
+
             connectionSocket.Close();
         }
     }
