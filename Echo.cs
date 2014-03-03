@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
+using System.Runtime.Remoting.Channels;
+using System.Web;
+using log4net;
+using log4net.Config;
 
 namespace HTTPserver
 {
@@ -14,6 +15,7 @@ namespace HTTPserver
         private StreamReader sr;
         private StreamWriter sw;
         private const string RootCatalog = "C:/temporary";
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(Echo));
 
         public Echo(Socket connectionSocket)
         {
@@ -28,14 +30,11 @@ namespace HTTPserver
 
             while (!string.IsNullOrEmpty(message))
             {
-                Console.WriteLine("Client: " + message);
+                Logger.Info("Client: " + message);
                 message = sr.ReadLine();
             }
 
-            sw.WriteLine("HTTP/1.0 200 OK \r\n");
-
             string[] words = firstLine.Split(' ');
-            //Console.WriteLine(words[1]);
 
             if (IsFileRequested(words[1]))
             {
@@ -43,10 +42,30 @@ namespace HTTPserver
             }
             else
             {
+                sw.WriteLine("HTTP/1.0 200 OK \r\n");
                 sw.WriteLine("No request");
+                Logger.Debug("No request");
             }
 
             connectionSocket.Close();
+        }
+
+        /**
+         * Decodes URL
+         * http://msdn.microsoft.com/en-us/library/system.web.httputility.urldecode.aspx
+         */
+        private string DecodeUrl(string url)
+        {
+            return HttpUtility.UrlDecode(url);
+        }
+
+        /**
+         * Decodes URL
+         * http://msdn.microsoft.com/en-us/library/system.web.httputility.urlencode.aspx
+         */
+        private string EncodeUrl(string url)
+        {
+            return HttpUtility.UrlEncode(url);
         }
 
         /**
@@ -66,13 +85,16 @@ namespace HTTPserver
             {
                 using (FileStream fs = File.Open(RootCatalog + fileRequested, FileMode.Open))
                 {
+                    sw.WriteLine("HTTP/1.0 202 Accepted \r\n");
                     fs.CopyTo(ns);
-                    sw.WriteLine(ns);
+                    Logger.Info("A file was requested.");
                 }
             }
             catch (FileNotFoundException e)
             {
+                sw.WriteLine("HTTP/1.0 404 Not Found \r\n");
                 sw.WriteLine("Invalid request!");
+                Logger.Error("Invalid request.");
             }
         }
     }
