@@ -12,6 +12,9 @@ namespace HTTPserver
 {
     class Program
     {
+
+        private static readonly string RootCatalog = "C:/temporary";
+
         static void Main(string[] args)
         {
             string name = "localhost";
@@ -24,12 +27,14 @@ namespace HTTPserver
             {
                 Socket connectionSocket = serverSocket.AcceptSocket();
                 Console.WriteLine("Server activated now");
-                Thread thread = new Thread(() => DoIt(connectionSocket));
-                thread.Start();
-                //DoIt(connectionSocket);
+
+                Task t = Task.Run(() => DoIt(connectionSocket));
+
+                //Thread thread = new Thread(() => DoIt(connectionSocket));
+                //thread.Start();
             }
 
-            serverSocket.Stop();
+           serverSocket.Stop();
         }
 
         public static void DoIt(Socket connectionSocket)
@@ -51,10 +56,22 @@ namespace HTTPserver
 
             sw.WriteLine("HTTP/1.0 200 OK \r\n");
             sw.WriteLine("\r\n");
-            if (IsFileRequested(firstLine))
+
+            string[] words = firstLine.Split(' ');
+            if (IsFileRequested(words[1]))
             {
-                string[] words = firstLine.Split(' ');
-                sw.WriteLine(words[1] + " was requested");
+                try
+                {
+                    using (FileStream fs = File.Open(RootCatalog + words[1], FileMode.Open))
+                    {
+                        fs.CopyTo(ns);
+                        sw.WriteLine(ns);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    sw.WriteLine("Invalid request!");
+                }
             }
             else
             {
@@ -69,12 +86,12 @@ namespace HTTPserver
          */
         public static bool IsFileRequested(string text)
         {
-            string[] words = text.Split(' ');
-            if (words[1].Equals("/"))
-            {
-                return false;
-            }
-            return true;
+            return !text.Equals("/");
+        }
+
+        public static void ReadFileRequested(string fileRequested)
+        {
+            
         }
     }
 }

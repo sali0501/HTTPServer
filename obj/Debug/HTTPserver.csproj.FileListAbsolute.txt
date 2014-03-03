@@ -4,3 +4,9 @@ c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\bin\D
 c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.exe
 c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.pdb
 c:\users\salik\documents\visual studio 2013\Projects\HTTPserver\HTTPserver\obj\Debug\HTTPserver.csprojResolveAssemblyReference.cache
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\HTTPserver.exe.config
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\obj\Debug\HTTPserver.exe
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\obj\Debug\HTTPserver.pdb
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\HTTPserver.exe
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\HTTPserver.pdb
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\obj\Debug\HTTPserver.csprojResolveAssemblyReference.cache
