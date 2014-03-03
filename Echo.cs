@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace HTTPserver
 {
-    class Echo
+    public class Echo
     {
-
         private const string RootCatalog = "C:/temporary";
+
+        private Stream ns;
+        private StreamReader sr;
+        private StreamWriter sw;
 
         public Echo(Socket connectionSocket)
         {
-            Stream ns = new NetworkStream(connectionSocket);
-            StreamReader sr = new StreamReader(ns);
-            StreamWriter sw = new StreamWriter(ns);
+            ns = new NetworkStream(connectionSocket);
+            sr = new StreamReader(ns);
+            sw = new StreamWriter(ns);
 
             sw.AutoFlush = true; // enable automatic flushing
 
@@ -36,18 +39,7 @@ namespace HTTPserver
             Console.WriteLine(words[1]);
             if (IsFileRequested(words[1]))
             {
-                try
-                {
-                    using (FileStream fs = File.Open(RootCatalog + words[1], FileMode.Open))
-                    {
-                        fs.CopyTo(ns);
-                        sw.WriteLine(ns);
-                    }
-                }
-                catch (FileNotFoundException e)
-                {
-                    sw.WriteLine("Invalid request!");
-                }
+                OpenFileRequested(words[1]);
             }
             else
             {
@@ -60,9 +52,25 @@ namespace HTTPserver
         /**
          * Checks if theres a request from browser
          */
-        private static bool IsFileRequested(string text)
+        private bool IsFileRequested(string fileRequested)
         {
-            return !text.Equals("/");
+            return !fileRequested.Equals("/");
+        }
+
+        private void OpenFileRequested(string fileRequested)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(RootCatalog + fileRequested, FileMode.Open))
+                {
+                    fs.CopyTo(ns);
+                    sw.WriteLine(ns);
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                sw.WriteLine("Invalid request!");
+            }
         }
     }
 }

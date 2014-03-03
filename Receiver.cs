@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HTTPserver
 {
-    class Receiver
+    public class Receiver
     {
         public Receiver()
         {
