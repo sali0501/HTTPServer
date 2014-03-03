@@ -10,3 +10,5 @@ C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\obj\De
 C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\HTTPserver.exe
 C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\HTTPserver.pdb
 C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\obj\Debug\HTTPserver.csprojResolveAssemblyReference.cache
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\log4net.dll
+C:\Users\Salik\SkyDrive\RHS\Softwarearkitektur\Kode\HTTPserver\HTTPserver\bin\Debug\log4net.xml
