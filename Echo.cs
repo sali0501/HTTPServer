@@ -10,7 +10,7 @@ namespace HTTPserver
 {
 
     /// <summary>
-    /// Response to a HTTP request message
+    /// Response to a HTTP request message.
     /// </summary>
     public class Echo
     {
@@ -22,7 +22,7 @@ namespace HTTPserver
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Echo));
 
         /// <summary>
-        /// Reads HTTP request message
+        /// Reads HTTP request message.
         /// </summary>
         /// <param name="connectionSocket"></param>
         public Echo(Socket connectionSocket)

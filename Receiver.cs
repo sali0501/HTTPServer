@@ -12,7 +12,7 @@ namespace HTTPserver
 {
 
     /// <summary>
-    /// Waits to receive for a HTTP request message
+    /// Waits to receive for a HTTP request message.
     /// </summary>
     public class Receiver
     {
@@ -21,8 +21,8 @@ namespace HTTPserver
         private bool _run = true;
 
         /// <summary>
-        /// Listens to localhost:6789
-        /// Use threadpool for every client
+        /// Listens to http://localhost:6789.
+        /// Use threadpool for every client.
         /// </summary>
         public Receiver()
         {
