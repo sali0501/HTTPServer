@@ -10,6 +10,10 @@ namespace HTTPserver
 {
     public class Receiver
     {
+        /// <summary>
+        /// Listens to localhost:6789
+        /// Use threadpool for every client
+        /// </summary>
         public Receiver()
         {
             string name = "localhost";

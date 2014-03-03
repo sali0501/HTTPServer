@@ -4,17 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HTTPserver
 {
     public class Echo
     {
-        private const string RootCatalog = "C:/temporary";
-
+        
         private Stream ns;
         private StreamReader sr;
         private StreamWriter sw;
+        private const string RootCatalog = "C:/temporary";
 
         public Echo(Socket connectionSocket)
         {
@@ -37,6 +36,7 @@ namespace HTTPserver
 
             string[] words = firstLine.Split(' ');
             Console.WriteLine(words[1]);
+
             if (IsFileRequested(words[1]))
             {
                 OpenFileRequested(words[1]);
@@ -57,6 +57,9 @@ namespace HTTPserver
             return !fileRequested.Equals("/");
         }
 
+        /**
+         * Open requested file
+         */
         private void OpenFileRequested(string fileRequested)
         {
             try
