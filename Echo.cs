@@ -35,7 +35,7 @@ namespace HTTPserver
             sw.WriteLine("HTTP/1.0 200 OK \r\n");
 
             string[] words = firstLine.Split(' ');
-            Console.WriteLine(words[1]);
+            //Console.WriteLine(words[1]);
 
             if (IsFileRequested(words[1]))
             {
