@@ -8,6 +8,10 @@ using log4net.Config;
 
 namespace HTTPserver
 {
+
+    /// <summary>
+    /// Response to a HTTP request message
+    /// </summary>
     public class Echo
     {
         
@@ -17,6 +21,10 @@ namespace HTTPserver
         private const string RootCatalog = "C:/temporary";
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Echo));
 
+        /// <summary>
+        /// Reads HTTP request message
+        /// </summary>
+        /// <param name="connectionSocket"></param>
         public Echo(Socket connectionSocket)
         {
             ns = new NetworkStream(connectionSocket);
