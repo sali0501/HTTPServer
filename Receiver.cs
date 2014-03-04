@@ -24,12 +24,13 @@ namespace HTTPserver
         /// Listens to http://localhost:6789.
         /// Use threadpool for every client.
         /// </summary>
-        public Receiver()
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        public Receiver(string ip, int port)
         {
-            string name = "localhost";
-            IPAddress[] addrs = Dns.GetHostEntry(name).AddressList;
+            IPAddress[] addrs = Dns.GetHostEntry(ip).AddressList;
 
-            TcpListener serverSocket = new TcpListener(6789);
+            TcpListener serverSocket = new TcpListener(port);
             serverSocket.Start();
 
             // http://msdn.microsoft.com/en-us/library/system.console.cancelkeypress(v=vs.110).aspx
@@ -42,7 +43,7 @@ namespace HTTPserver
                 Socket connectionSocket = serverSocket.AcceptSocket();
                 Logger.Info("Server activated now");
 
-                Task.Run(() => new Echo(connectionSocket));
+                Task.Run(() => new Request(connectionSocket));
             }
 
             serverSocket.Stop();

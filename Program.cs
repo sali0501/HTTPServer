@@ -17,7 +17,7 @@ namespace HTTPserver
 
         static void Main(string[] args)
         {
-            Receiver r = new Receiver();
+            Receiver r = new Receiver("localhost", 6789);
         }
     }
 }
