@@ -58,11 +58,18 @@ namespace HTTPserver
             connectionSocket.Close();
         }
 
+
+        
         /**
          * Decodes URL
          * http://msdn.microsoft.com/en-us/library/system.web.httputility.urldecode.aspx
          */
-        private string DecodeUrl(string url)
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        public string DecodeUrl(string url)
         {
             return HttpUtility.UrlDecode(url);
         }
@@ -71,7 +78,7 @@ namespace HTTPserver
          * Decodes URL
          * http://msdn.microsoft.com/en-us/library/system.web.httputility.urlencode.aspx
          */
-        private string EncodeUrl(string url)
+        public string EncodeUrl(string url)
         {
             return HttpUtility.UrlEncode(url);
         }
@@ -79,7 +86,7 @@ namespace HTTPserver
         /**
          * Checks if theres a request from browser
          */
-        private bool IsFileRequested(string fileRequested)
+        public bool IsFileRequested(string fileRequested)
         {
             return !fileRequested.Equals("/");
         }
@@ -91,7 +98,7 @@ namespace HTTPserver
         {
             try
             {
-                using (FileStream fs = File.Open(RootCatalog + fileRequested, FileMode.Open))
+                using (FileStream fs = File.Open(RootCatalog + DecodeUrl(fileRequested), FileMode.Open))
                 {
                     sw.WriteLine("HTTP/1.0 202 Accepted \r\n");
                     fs.CopyTo(ns);
